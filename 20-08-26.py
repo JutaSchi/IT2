@@ -10,7 +10,13 @@
 
 
 
-print(2*3+3)
-print(2*3-8/2)
-print(3*4/2)
-print(3/4*2+17)
+#print(2*3+3)
+#print(2*3-8/2)
+#print(3*4/2)
+#print(3/4*2+17)
+
+
+if input("ja eller nei ") == "ja":
+    print("du svarte ja ")
+
+
