@@ -3,7 +3,7 @@
 #skal presentere resultatet i et tabelliknende oppsett som viser aktiviteter og totalt antall 
 #deltakere for hver aktivitet.
 import json
-
+print("oppgave A")
 with open("friluftslivsaktiviteter_2024.json", "r", encoding="utf-8") as fil:
     data = json.load(fil)
 
@@ -22,20 +22,19 @@ for aktivitet in data["aktiviteter"]:
     print(navn.ljust(60), totalt)
 
 
-
 #Oppgave 8b 
 #Utvid programmet slik at brukeren kan angi eller velge et fylke i grensesnittet 
 # (f. eks. Oslo). Programmet skal deretter vise alle aktivitetene for det valgte 
 # fylket i stigende rekkefølge, både som antall og som prosentandel. 
 
 import json
-
+print ("Oppgave B")
 with open("friluftslivsaktiviteter_2024.json", "r", encoding="utf-8") as fil:
     data = json.load(fil)
 
 print("Fylker:")
 for kode, navn in data["fylkeskoder"].items():
-    print("-", navn)
+    print(navn)
 
 valgt_fylke = input("\nSkriv inn fylke: ")
 
@@ -46,7 +45,7 @@ for kode, navn in data["fylkeskoder"].items():
         fylkekode = kode
 
 if fylkekode is None:
-    print("finnes ikke")
+    print("error")
 
 else:
     resultater = []
