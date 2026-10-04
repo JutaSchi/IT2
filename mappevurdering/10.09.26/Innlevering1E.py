@@ -3,23 +3,25 @@
 #skal presentere resultatet i et tabelliknende oppsett som viser aktiviteter og totalt antall 
 #deltakere for hver aktivitet.
 import json
-print("oppgave A")
-with open("friluftslivsaktiviteter_2024.json", "r", encoding="utf-8") as fil:
-    data = json.load(fil)
 
-print("Aktivitet".ljust(60), "Totalt antall")
-print("-" * 80)
+def oppgave_a():
+    print("oppgave A")
+    with open("friluftslivsaktiviteter_2024.json", "r", encoding="utf-8") as fil:
+        data = json.load(fil)
+
+    print("Aktivitet".ljust(60), "Totalt antall")
+    print("-" * 80)
 
 
-for aktivitet in data["aktiviteter"]:
-    navn = aktivitet["friluftslivsaktivitet"]
-    
-    totalt = 0
+    for aktivitet in data["aktiviteter"]:
+        navn = aktivitet["friluftslivsaktivitet"]
+        
+        totalt = 0
 
-    for antall in aktivitet["fylker"].values():
-        totalt += antall
+        for antall in aktivitet["fylker"].values():
+            totalt += antall
 
-    print(navn.ljust(60), totalt)
+        print(navn.ljust(60), totalt)
 
 
 #Oppgave 8b 
@@ -28,40 +30,62 @@ for aktivitet in data["aktiviteter"]:
 # fylket i stigende rekkefølge, både som antall og som prosentandel. 
 
 import json
-print ("Oppgave B")
-with open("friluftslivsaktiviteter_2024.json", "r", encoding="utf-8") as fil:
-    data = json.load(fil)
 
-print("Fylker:")
-for kode, navn in data["fylkeskoder"].items():
-    print(navn)
+def oppgave_b():
+    print ("Oppgave B")
+    with open("friluftslivsaktiviteter_2024.json", "r", encoding="utf-8") as fil:
+        data = json.load(fil)
 
-valgt_fylke = input("\nSkriv inn fylke: ")
+    print("Fylker:")
+    for kode, navn in data["fylkeskoder"].items():
+        print(navn)
 
-fylkekode = None
+    valgt_fylke = input("\nSkriv inn fylke: ")
 
-for kode, navn in data["fylkeskoder"].items():
-    if navn.lower() == valgt_fylke.lower():
-        fylkekode = kode
+    fylkekode = None
 
-if fylkekode is None:
-    print("error")
+    for kode, navn in data["fylkeskoder"].items():
+        if navn.lower() == valgt_fylke.lower():
+            fylkekode = kode
 
-else:
-    resultater = []
+    if fylkekode is None:
+        print("error")
 
-    for aktivitet in data["aktiviteter"]:
-        navn = aktivitet["friluftslivsaktivitet"]
-        antall = aktivitet["fylker"][fylkekode]
+    else:
+        resultater = []
 
-        prosent = antall / 1000 * 100
+        for aktivitet in data["aktiviteter"]:
+            navn = aktivitet["friluftslivsaktivitet"]
+            antall = aktivitet["fylker"][fylkekode]
 
-        resultater.append((navn, antall, prosent))
-    resultater.sort(key=lambda x: x[1])
+            prosent = antall / 1000 * 100
 
-    print("\nAktiviteter i", valgt_fylke)
-    print("-" * 90)
-    print("Aktivitet".ljust(60), "Antall".ljust(10), "Prosent")
-    print("-" * 90)
-    for navn, antall, prosent in resultater:
-        print(navn.ljust(60), str(antall).ljust(10), f"{prosent:.1f}%")
+            resultater.append((navn, antall, prosent))
+        resultater.sort(key=lambda x: x[1])
+
+        print("\nAktiviteter i", valgt_fylke)
+        print("-" * 90)
+        print("Aktivitet".ljust(60), "Antall".ljust(10), "Prosent")
+        print("-" * 90)
+        for navn, antall, prosent in resultater:
+            print(navn.ljust(60), str(antall).ljust(10), f"{prosent:.1f}%")
+
+
+while True:
+    print("==============================")
+    print(" FRILUFTSLIVSAKTIVITETER")
+    print("1.Print total antall deltagere")
+    print("2.Velg fylke")
+    print("3.Avslutt")
+
+    valg=input("Velg et alternativ")
+    if valg=="1":
+        oppgave_a()
+    elif valg=="2":
+        oppgave_b()
+    elif valg=="3":
+        break
+    else:
+        print("error")
+
+
